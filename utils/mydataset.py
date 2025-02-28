@@ -9,9 +9,10 @@ class RareDataset():
         self.dataset_type = dataset_type
         if dataset_path is None:
             if dataset_name in ["RAMEDIS", "MME", "HMS", "LIRICAL", "PUMCH_ADM"]:
+                print(dataset_name)
                 self.data = load_dataset('chenxz/RareBench', dataset_name, split='test')
             else:
-                raise ERROR("Dataset not found")
+                raise Exception("Dataset not found")
         else:
             with open(dataset_path, "r", encoding="utf-8-sig") as f:
                 self.data = json.load(f)

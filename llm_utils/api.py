@@ -1,6 +1,4 @@
 import openai
-import zhipuai
-import google.generativeai as genai
 import time
 
 class Openai_api_handler:
@@ -70,77 +68,6 @@ class Openai_api_handler:
             print("Input tokens: ", completion.usage.prompt_tokens, "Output tokens: ", completion.usage.completion_tokens)
             print(f'OpenAI API time: {time.time() - t}')
             return result['answer']
-        except Exception as e:
-            print(e)
-            return None
-
-    def get_embedding(self, text, model="text-embedding-ada-002"):
-        text = text.replace("\n", " ")
-        try:
-            response = openai.embeddings.create(input = [text], model=model)
-            result = {
-                'text': text,
-                'model': model,
-                'embedding': response.data[0].embedding,
-                'usage': {
-                    'input_tokens': int(response.usage.prompt_tokens),
-                    'total_tokens': int(response.usage.total_tokens),
-                }
-            }
-            return result
-        except Exception as e:
-            print(e)
-            return None
-        
-class Zhipuai_api_handler:
-    def __init__(self, model) -> None:
-        # Put your own key in the llm_utils/glm_key.txt file
-        with open('llm_utils/glm_key.txt', 'r') as f:
-            zhipuai.api_key = f.readline().strip()
-        if model == 'glm4':
-            self.model = "glm-4"
-        elif model == 'glm3_turbo':
-            self.model = "glm-3-turbo"
-        self.model_name = model
-
-    def get_completion(self, system_prompt, prompt, seed=42):
-        try:
-            t = time.time()
-            response = zhipuai.model_api.sse_invoke(
-                model=self.model,
-                prompt= system_prompt + prompt,
-                temperature=0.15,
-                top_p=0.7
-            )
-
-            result = ''
-            for event in response.events():
-                if event.event == "add":
-                    result += event.data
-            print(f'{self.model} API time: {time.time() - t}')
-            return result
-        except Exception as e:
-            print(e)
-            return None
-        
-
-class Gemini_api_handler:
-    def __init__(self, model) -> None:
-        # Put your own key in the llm_utils/gemini_key.txt file
-        with open('llm_utils/gemini_key.txt', 'r') as f:
-            genai.configure(api_key=f.readline().strip(), transport='rest')  
-        if model == 'gemini_pro':
-            self.model_name = "gemini_pro"
-            self.model = genai.GenerativeModel('gemini-pro')
-
-    def get_completion(self, system_prompt, prompt, seed=42):
-        try:
-            t = time.time()
-            response = self.model.generate_content(system_prompt+prompt)
-            result = response.text
-            
-            print(f'Gemini API time: {time.time() - t}')
-            return result
         except Exception as e:
             print(e)
             return None

@@ -1,5 +1,3 @@
-from llm_utils.api import Openai_api_handler, Zhipuai_api_handler
-
 def diagnosis_evaluate(predict_diagnosis, golden_diagnosis, handler):
     if predict_diagnosis is None:
         raise Exception("Predict diagnosis is None")
