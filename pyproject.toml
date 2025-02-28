@@ -1,0 +1,11 @@
+[project]
+name = "bf-rarebench"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "benchflow==0.1.9",
+    "datasets>=3.3.2",
+    "openai>=1.65.1",
+]
