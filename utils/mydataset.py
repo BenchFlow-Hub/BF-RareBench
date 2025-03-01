@@ -3,10 +3,9 @@ from datasets import load_dataset
 
 
 class RareDataset():
-    def __init__(self, dataset_name, dataset_path, dataset_type) -> None:
+    def __init__(self, dataset_name, dataset_path) -> None:
         self.dataset_name = dataset_name
         self.dataset_path = dataset_path
-        self.dataset_type = dataset_type
         if dataset_name == "PHENOTYPE":
             self.patient = self.load_ehr_phenotype_data()
         elif dataset_path is None:
@@ -32,7 +31,7 @@ class RareDataset():
             else:
                 phenotype_list = p[0]
                 disease_list = p[1]
-            if self.dataset_type == "PHENOTYPE":
+            if self.dataset_name == "PHENOTYPE":
                 phenotype_list = [phenotype_mapping[phenotype] for phenotype in phenotype_list if phenotype in phenotype_mapping]
                 disease_list = [disease_mapping[disease] for disease in disease_list if disease in disease_mapping]
             phenotype = ",".join(phenotype_list)

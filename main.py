@@ -224,7 +224,7 @@ def main():
     # if args.model in ["gpt4", "chatgpt"]:
     #     handler = Openai_api_handler(args.model)
 
-    dataset = RareDataset(args.dataset_name, args.dataset_path, args.dataset_type)
+    dataset = RareDataset(args.dataset_name, args.dataset_path)
     
     if args.few_shot == "none":
         few_shot = ""
