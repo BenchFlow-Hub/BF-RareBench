@@ -1,11 +1,11 @@
 import openai
 import time
+import os
 
 class Openai_api_handler:
     def __init__(self, model) -> None:
         # Put your own key in the llm_utils/gpt_key.txt file
-        with open('llm_utils/gpt_key.txt', 'r') as f:
-            openai.api_key = f.readline().strip()
+        openai.api_key = os.getenv('OPENAI_API_KEY')
         if model == 'gpt4':
             self.model = "gpt-4-1106-preview"
         elif model == 'chatgpt':
