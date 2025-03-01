@@ -61,7 +61,7 @@ class RareBench(BaseBench):
         
         # Parse the log content to extract score and status
         is_resolved = True
-        metrics = result["metrics"]
+        metrics = result["metric"]
         log_content_txt = os.path.join("/app", result["folder"])
         for file in os.listdir(log_content_txt):
             with open(os.path.join(log_content_txt, file), 'r') as f:
