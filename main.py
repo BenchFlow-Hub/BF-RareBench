@@ -78,8 +78,6 @@ def diagnosis_metric_calculate(folder, judge_model="chatgpt"):
     metric['recall_top_10'] = len([i for i in recall_top_k if i <= 10]) / len(recall_top_k)
     metric['medain_rank'] = np.median(recall_top_k)
     
-    print(folder)
-    print(metric)
     print("predict_rank error: ", CNT)
     print("evaluate tokens: ", handler.gpt4_tokens, handler.chatgpt_tokens, handler.chatgpt_instruct_tokens)
     
@@ -214,7 +212,7 @@ def main():
     parser.add_argument('--dataset_name', type=str, default="LIRICAL", choices=["RAMEDIS", "MME", "HMS", "LIRICAL", "PUMCH_ADM"])
     parser.add_argument('--dataset_path', default=None)
     parser.add_argument('--dataset_type', type=str, default="PHENOTYPE", choices=["EHR", "PHENOTYPE", "MDT"])
-    parser.add_argument('--results_folder', default='./results/')
+    parser.add_argument('--results_folder', default='./results')
     parser.add_argument('--judge_model', type=str, default="chatgpt", choices=["gpt4", "chatgpt"])
     parser.add_argument('--few_shot', type=str, default="none", choices=["none", "random", "dynamic", "medprompt"])
     parser.add_argument('--cot', type=str, default="none", choices=["none", "zero-shot"])
@@ -238,7 +236,7 @@ def main():
         cot = ""
     elif args.cot == "zero-shot":
         cot = "_cot"
-    results_folder = os.path.join(args.results_folder, args.dataset_name, args.task_type+few_shot+cot)
+    results_folder = os.path.join(args.results_folder, args.dataset_type, args.dataset_name, args.task_type+few_shot+cot)
     run_task(args.task_type, dataset, args.intelligence_url, results_folder, args.few_shot, args.cot, args.judge_model, args.eval)
 
 if __name__ == "__main__":
