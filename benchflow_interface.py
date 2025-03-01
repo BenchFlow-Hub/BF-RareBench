@@ -11,13 +11,13 @@ class RareBench(BaseBench):
 
     def get_args(self, task_id: str) -> BenchArgs:
         arguments = {
-            "required": ["TASK_TYPE", "DATASET_NAME", "DATASET_TYPE"],
+            "required": ["OPENAI_API_KEY"],
             "optional": [
                 {"JUDGE_MODEL": "chatgpt"},
                 {"FEW_SHOT": "none"},
                 {"COT": "none"},
-                {"TEST_END_IDX": str(int(task_id) + 1)}
-            ]
+                {"TEST_END_IDX": f"{task_id}"}
+            ],
         }
         return BenchArgs(arguments)
     
@@ -72,7 +72,7 @@ class RareBench(BaseBench):
         Return a dictionary with all task IDs and an optional error message.
         For 'train' split, return 200 tasks; otherwise, return 812 tasks.
         """
-        return {"task_ids": "0", "error_message": None}
+        return {"task_ids": ["RAMEDIS", "MME", "HMS", "LIRICAL", "PUMCH_ADM", "PHENOTYPE"], "error_message": None}
     
     def cleanup(self):
         """

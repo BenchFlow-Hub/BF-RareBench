@@ -7,7 +7,9 @@ class RareDataset():
         self.dataset_name = dataset_name
         self.dataset_path = dataset_path
         self.dataset_type = dataset_type
-        if dataset_path is None:
+        if dataset_name == "PHENOTYPE":
+            self.patient = self.load_ehr_phenotype_data()
+        elif dataset_path is None:
             if dataset_name in ["RAMEDIS", "MME", "HMS", "LIRICAL", "PUMCH_ADM"]:
                 print(dataset_name)
                 self.data = load_dataset('chenxz/RareBench', dataset_name, split='test')
@@ -16,8 +18,6 @@ class RareDataset():
         else:
             with open(dataset_path, "r", encoding="utf-8-sig") as f:
                 self.data = json.load(f)
-        if self.dataset_type == "PHENOTYPE":
-            self.patient = self.load_ehr_phenotype_data()
 
     def load_ehr_phenotype_data(self):
         phenotype_mapping = json.load(open("mapping/phenotype_mapping.json", "r", encoding="utf-8-sig"))
