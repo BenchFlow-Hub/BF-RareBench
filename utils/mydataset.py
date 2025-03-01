@@ -9,7 +9,7 @@ class RareDataset():
         self.dataset_type = dataset_type
         if dataset_path is None:
             if dataset_name in ["RAMEDIS", "MME", "HMS", "LIRICAL", "PUMCH_ADM"]:
-                self.data = load_dataset('chenxz/RareBench', dataset_name, split='test')
+                self.data = load_dataset('chenxz/RareBench', dataset_name, split='test', trust_remote_code=True)
             else:
                 raise ValueError("Dataset not found")
         else:
