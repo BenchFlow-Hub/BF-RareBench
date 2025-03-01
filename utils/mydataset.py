@@ -11,7 +11,7 @@ class RareDataset():
         elif dataset_path is None:
             if dataset_name in ["RAMEDIS", "MME", "HMS", "LIRICAL", "PUMCH_ADM"]:
                 print(dataset_name)
-                self.data = load_dataset('chenxz/RareBench', dataset_name, split='test')
+                self.data = load_dataset('chenxz/RareBench', dataset_name, split='test', trust_remote_code=True)
             else:
                 raise Exception("Dataset not found")
         else:
