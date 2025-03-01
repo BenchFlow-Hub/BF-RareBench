@@ -214,7 +214,7 @@ def main():
     parser.add_argument('--dataset_name', type=str, default="LIRICAL", choices=["RAMEDIS", "MME", "HMS", "LIRICAL", "PUMCH_ADM"])
     parser.add_argument('--dataset_path', default=None)
     parser.add_argument('--dataset_type', type=str, default="PHENOTYPE", choices=["EHR", "PHENOTYPE", "MDT"])
-    parser.add_argument('--results_folder', default='./results/PUMCH')
+    parser.add_argument('--results_folder', default='./results/')
     parser.add_argument('--judge_model', type=str, default="chatgpt", choices=["gpt4", "chatgpt"])
     parser.add_argument('--few_shot', type=str, default="none", choices=["none", "random", "dynamic", "medprompt"])
     parser.add_argument('--cot', type=str, default="none", choices=["none", "zero-shot"])
