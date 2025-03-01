@@ -211,8 +211,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--intelligence_url', type=str, default="http://localhost:8000")
     parser.add_argument('--task_type', type=str, default="diagnosis", choices=["diagnosis", "mdt"])
-    parser.add_argument('--dataset_name', type=str, default="LIRICAL", choices=["RAMEDIS", "MME", "HMS", "LIRICAL", "PUMCH_ADM", "PHENOTYPE"])
+    parser.add_argument('--dataset_name', type=str, default="LIRICAL", choices=["RAMEDIS", "MME", "HMS", "LIRICAL", "PUMCH_ADM"])
     parser.add_argument('--dataset_path', default=None)
+    parser.add_argument('--dataset_type', type=str, default="PHENOTYPE", choices=["EHR", "PHENOTYPE", "MDT"])
     parser.add_argument('--results_folder', default='./results/PUMCH')
     parser.add_argument('--judge_model', type=str, default="chatgpt", choices=["gpt4", "chatgpt"])
     parser.add_argument('--few_shot', type=str, default="none", choices=["none", "random", "dynamic", "medprompt"])
@@ -221,10 +222,7 @@ def main():
 
     args = parser.parse_args()
 
-    # if args.model in ["gpt4", "chatgpt"]:
-    #     handler = Openai_api_handler(args.model)
-
-    dataset = RareDataset(args.dataset_name, args.dataset_path)
+    dataset = RareDataset(args.dataset_name, args.dataset_path, args.dataset_type)
     
     if args.few_shot == "none":
         few_shot = ""

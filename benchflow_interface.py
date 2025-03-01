@@ -13,6 +13,7 @@ class RareBench(BaseBench):
         arguments = {
             "required": ["OPENAI_API_KEY"],
             "optional": [
+                {"DATASET_TYPE": "PHENOTYPE"},
                 {"JUDGE_MODEL": "chatgpt"},
                 {"FEW_SHOT": "none"},
                 {"COT": "none"},
