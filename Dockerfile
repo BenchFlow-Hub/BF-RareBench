@@ -10,6 +10,7 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . .
 
-RUN chmod +x run.sh
+COPY run.sh .
+RUN chmod +x ./run.sh
 
-ENTRYPOINT ["run.sh"]
+ENTRYPOINT ["./run.sh"]
