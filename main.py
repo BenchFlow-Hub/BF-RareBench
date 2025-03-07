@@ -190,7 +190,7 @@ def run_task(task_type, dataset:RareDataset, intelligence_url, results_folder, f
             res = {
                 "patient_info": patient_info,
                 "golden_diagnosis": golden_diagnosis,
-                "predict_diagnosis": predict_diagnosis['raw_prediction'],
+                "predict_diagnosis": predict_diagnosis['raw_response'],
                 "predict_rank": predict_rank
             }
             json.dump(res, open(result_file, "w", encoding="utf-8-sig"), indent=4, ensure_ascii=False)
